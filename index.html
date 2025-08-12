@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/10306/10306029.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi App con Gemini AI</title>
+  
+  <!-- CSS de Prism y sus plugins -->
+  <link id="prism-theme" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+  <div class="app-wrapper">
+    <aside class="history-panel" id="historyPanel">
+      <div class="history-header">
+        <h3>Historial de Chats</h3>
+        <button id="clearHistoryBtn" title="Limpiar historial">🗑️</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <div class="theme-toggle-container">
+        <button id="themeToggle" title="Cambiar modo claro/oscuro">🌞</button>
+      </div>
+      <button id="menuToggle" class="menu-toggle" title="Mostrar/Ocultar Historial">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="container">
+        <div style="text-align: center;">
+          <img src="https://avatars.githubusercontent.com/u/38921558?v=4" alt="Avatar" style="width: 70px; height: 70px; border-radius: 50%;">
+        </div>
+        <h1>🛠️ Creando una Interfaz Personalizada con la API de Google 😃🚀</h1>
+
+        <div class="prompt-section">
+          <div class="prompt-container">
+            <textarea class="prompt-area" id="promptInput" placeholder="Escribe tu consulta o usa el micrófono..." rows="1"></textarea>
+            <button id="micBtn" class="mic-btn" title="Activar micrófono">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+            </button>
+          </div>
+          <br>
+          <div class="button-group">
+            <button id="executeBtn" title="Enviar consulta">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16"><path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/></svg>
+              Enviar
+            </button>
+            <button id="clearBtn" title="Limpiar consulta y resultado">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser" viewBox="0 0 16 16"><path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z"/></svg>
+              Limpiar
+            </button>
+          </div>
+        </div>
+        <div class="result-container">
+          <div class="result-header">
+            <h3>Respuesta de la IA 🤖:</h3>
+            <div class="result-actions">
+              <button id="copyBtn" title="Copiar todo el resultado" class="flurente-button" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-clipboard" viewBox="0 0 16 16">
+                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                </svg>
+                <span class="copy-text">✨ Copiar Todo</span>
+                </button>
+              <div class="dropdown" id="downloadDropdown">
+                <button id="saveBtn" class="flurente-green-button dropdown-toggle" title="Guardar como..." disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                </svg>
+                <span class="save-text">✨ Guardar</span>
+                </button>
+                <div class="dropdown-menu" id="downloadOptions">
+                  <a href="#" id="saveTxtBtn">Guardar como .txt</a>
+                  <a href="#" id="saveCsvBtn">Guardar como .csv</a>
+                  <a href="#" id="saveXlsxBtn">Guardar como .xlsx</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="resultBox" class="result-box">Esperando consulta...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="loading" id="loading" style="display: none;">
+    <div class="spinner"></div>
+    <span>Cargando...</span>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Scripts de Prism y Plugins (Método robusto) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+  <script>
+    // --- Referencias a elementos del DOM ---
+    const executeBtn = document.getElementById('executeBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const promptInput = document.getElementById('promptInput');
+    const resultBox = document.getElementById('resultBox');
+    const loadingIndicator = document.getElementById('loading');
+    const copyBtn = document.getElementById('copyBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const historyPanel = document.getElementById('historyPanel');
+    const historyList = document.getElementById('historyList');
+    const mainContent = document.getElementById('mainContent');
+    const downloadDropdown = document.getElementById('downloadDropdown');
+    const saveTxtBtn = document.getElementById('saveTxtBtn');
+    const saveCsvBtn = document.getElementById('saveCsvBtn');
+    const saveXlsxBtn = document.getElementById('saveXlsxBtn');
+    const micBtn = document.getElementById('micBtn');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+    // --- Lógica de Reconocimiento de Voz ---
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition;
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.lang = 'es-ES';
+        recognition.interimResults = true;
+        micBtn.addEventListener('click', () => {
+            micBtn.classList.contains('is-listening') ? recognition.stop() : recognition.start();
+        });
+        recognition.onstart = () => {
+            micBtn.classList.add('is-listening');
+            promptInput.placeholder = "Escuchando...";
+        };
+        recognition.onend = () => {
+            micBtn.classList.remove('is-listening');
+            promptInput.placeholder = "Escribe tu consulta o usa el micrófono...";
+        };
+        recognition.onerror = (event) => console.error('Error en reconocimiento de voz:', event.error);
+        recognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
+            }
+            promptInput.value += finalTranscript;
+            promptInput.dispatchEvent(new Event('input'));
+        };
+    } else {
+        micBtn.style.display = 'none';
+    }
+    
+    // --- Lógica de la Interfaz (UI) ---
+    themeToggleBtn.addEventListener('click', () => {
+        let targetTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', targetTheme);
+        localStorage.setItem('theme', targetTheme);
+        themeToggleBtn.textContent = targetTheme === 'light' ? '🌞' : '🌜';
+        updatePrismTheme(targetTheme);
+    });
+
+    function updatePrismTheme(theme) {
+        const prismLink = document.getElementById('prism-theme');
+        if (prismLink) {
+            prismLink.href = theme === 'dark'
+              ? 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css'
+              : 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css';
+        }
+    }
+
+    menuToggle.addEventListener('click', () => {
+        historyPanel.classList.toggle('open');
+        mainContent.classList.toggle('history-open');
+    });
+
+    promptInput.addEventListener('input', () => {
+        promptInput.style.height = 'auto';
+        promptInput.style.height = (promptInput.scrollHeight) + 'px';
+    });
+    
+    promptInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            executeBtn.click();
+        }
+    });
+
+    clearHistoryBtn.addEventListener('click', () => {
+        if (confirm('¿Estás seguro de que quieres borrar todo el historial?')) {
+            localStorage.removeItem('chatHistory');
+            loadHistory();
+        }
+    });
+
+    // --- Lógica del Historial (localStorage) ---
+    function loadHistory() {
+        const history = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        historyList.innerHTML = '';
+        if (history.length === 0) {
+            historyList.innerHTML = '<div class="history-empty">No hay chats guardados.</div>';
+            return;
+        }
+        history.forEach((item) => {
+            const historyItem = document.createElement('div');
+            historyItem.className = 'history-item';
+            const promptText = item.prompt.substring(0, 35) + (item.prompt.length > 35 ? '...' : '');
+            historyItem.innerHTML = `<div class="history-prompt">${promptText}</div>`;
+            historyItem.addEventListener('click', () => {
+                promptInput.value = item.prompt;
+                promptInput.dispatchEvent(new Event('input'));
+                displayResult(item.response);
+                if (window.innerWidth <= 768) {
+                    historyPanel.classList.remove('open');
+                    mainContent.classList.remove('history-open');
+                }
+            });
+            historyList.appendChild(historyItem);
+        });
+    }
+
+    function saveToHistory(prompt, response) {
+        let history = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        history.unshift({ prompt, response });
+        if (history.length > 50) history.pop();
+        localStorage.setItem('chatHistory', JSON.stringify(history));
+        loadHistory();
+    }
+
+    // --- Lógica Principal de la App ---
+    executeBtn.addEventListener('click', executeQuery);
+    clearBtn.addEventListener('click', clearAll);
+    copyBtn.addEventListener('click', () => copyToClipboard(resultBox.innerText));
+    saveTxtBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsTextFile(); });
+    saveCsvBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsCsvFile(); });
+    saveXlsxBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsXlsxFile(); });
+
+    async function executeQuery() {
+        const originalPrompt = promptInput.value.trim();
+        if (!originalPrompt) return showNotification('Por favor, escribe una consulta.');
+
+        const enhancedPrompt = originalPrompt + "\n\n---\nInstrucción para la IA: Si la respuesta incluye código, formátalo siempre usando bloques de Markdown con el nombre del lenguaje especificado (ej: ```javascript ...código... ```).";
+        setUIState(true);
+
+        try {
+            const response = await fetch('/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: enhancedPrompt }),
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || `Error ${response.status}`);
+            
+            const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (responseText) {
+                displayResult(responseText);
+                saveToHistory(originalPrompt, responseText);
+            } else {
+                throw new Error("El modelo no devolvió contenido de texto válido. Intenta reformular tu consulta.");
+            }
+        } catch (error) {
+            console.error('Error en executeQuery:', error);
+            resultBox.innerHTML = `<span class="error-message">${error.message}</span>`;
+        } finally {
+            setUIState(false);
+        }
+    }
+
+    function displayResult(text) {
+        resultBox.innerHTML = marked.parse(isCSV(text) ? renderCSVAsTable(text) : formatGeneralHTML(text));
+        
+        resultBox.querySelectorAll('pre').forEach(pre => {
+            pre.classList.add('line-numbers');
+        });
+
+        Prism.highlightAllUnder(resultBox);
+    }
+    
+    // --- Funciones de Formato y Renderizado ---
+    function isCSV(text) {
+        const lines = text.trim().split('\n');
+        if (lines.length < 2) return false;
+        const delimiter = lines[0].includes(',') ? ',' : (lines[0].includes(';') ? ';' : null);
+        if (!delimiter) return false;
+        const headerCols = lines[0].split(delimiter).length;
+        return headerCols >= 2 && lines.every(line => line.split(delimiter).length === headerCols);
+    }
+
+    function renderCSVAsTable(csvText) {
+        const lines = csvText.trim().split('\n');
+        const delimiter = lines[0].includes(',') ? ',' : ';';
+        let tableHtml = '<table><thead><tr>';
+        lines[0].split(delimiter).forEach(header => tableHtml += `<th>${header.trim()}</th>`);
+        tableHtml += '</tr></thead><tbody>';
+        lines.slice(1).forEach(line => {
+            tableHtml += '<tr>';
+            line.split(delimiter).forEach(cell => tableHtml += `<td>${cell.trim()}</td>`);
+            tableHtml += '</tr>';
+        });
+        tableHtml += '</tbody></table>';
+        return tableHtml;
+    }
+
+    function formatGeneralHTML(text) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = text;
+        tempDiv.querySelectorAll('p, li').forEach(el => {
+            el.style.lineHeight = '1.5';
+            if (el.tagName === 'P') el.style.textAlign = 'justify';
+        });
+        tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+            el.innerHTML = `<b>${el.innerHTML}</b>`;
+        });
+        let processedHtml = tempDiv.innerHTML;
+        processedHtml = processedHtml.replace(/\b(Importante)\b/gi, '⭐ $1');
+        processedHtml = processedHtml.replace(/\b(Ejemplo)\b/gi, '💡 $1');
+        processedHtml = processedHtml.replace(/\b(Nota)\b/gi, '📝 $1');
+        return processedHtml;
+    }
+
+    // --- Funciones de Utilidad (Copiar, Guardar, UI) ---
+    async function copyToClipboard(textToCopy) {
+        if (!textToCopy || resultBox.textContent === 'Esperando consulta...') return showNotification('No hay nada que copiar.');
+        try {
+            await navigator.clipboard.writeText(textToCopy);
+            const copyTextSpan = copyBtn.querySelector('.copy-text');
+            const originalText = copyTextSpan.textContent;
+            copyTextSpan.textContent = '¡Copiado!';
+            copyBtn.disabled = true;
+            setTimeout(() => {
+                copyTextSpan.textContent = originalText;
+                copyBtn.disabled = false;
+            }, 1500);
+        } catch (err) {
+            console.error('Error al copiar:', err);
+            showNotification('No se pudo copiar el texto.');
+        }
+    }
+
+    function saveAsTextFile() {
+        const textToSave = resultBox.innerText;
+        if (!textToSave) return;
+        triggerDownload(new Blob([textToSave], { type: 'text/plain;charset=utf-8' }), 'gemini-respuesta.txt');
+    }
+
+    function saveAsCsvFile() {
+        const table = resultBox.querySelector('table');
+        if (!table) return showNotification('No se encontró una tabla para exportar a CSV.');
+        let csv = [];
+        table.querySelectorAll('tr').forEach(row => {
+            let rowData = [];
+            row.querySelectorAll('th, td').forEach(cell => rowData.push(`"${cell.innerText.replace(/"/g, '""')}"`));
+            csv.push(rowData.join(','));
+        });
+        triggerDownload(new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' }), 'gemini-tabla.csv');
+    }
+
+    function saveAsXlsxFile() {
+        const table = resultBox.querySelector('table');
+        if (!table) return showNotification('No se encontró una tabla para exportar a XLSX.');
+        const wb = XLSX.utils.table_to_book(table);
+        XLSX.writeFile(wb, 'gemini-tabla.xlsx');
+    }
+    
+    function triggerDownload(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = filename;
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+        URL.revokeObjectURL(url);
+    }
+
+    function setUIState(isLoading) {
+        loadingIndicator.style.display = isLoading ? 'flex' : 'none';
+        executeBtn.disabled = isLoading;
+        clearBtn.disabled = isLoading;
+        const noResult = resultBox.textContent === 'Esperando consulta...';
+        copyBtn.disabled = isLoading || noResult;
+        saveBtn.disabled = isLoading || noResult;
+        downloadDropdown.toggleAttribute('disabled', isLoading || noResult);
+    }
+
+    function clearAll() {
+        promptInput.value = '';
+        resultBox.innerHTML = 'Esperando consulta...';
+        promptInput.style.height = 'auto';
+        setUIState(false);
+    }
+
+    function showNotification(message) {
+        alert(message);
+    }
+
+    // --- Carga Inicial ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      themeToggleBtn.textContent = theme === 'light' ? '🌞' : '🌜';
+      updatePrismTheme(theme);
+      loadHistory();
+      clearAll();
+    });
+  </script>
+</body>
+</html>

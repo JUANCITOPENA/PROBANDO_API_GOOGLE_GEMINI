@@ -1,0 +1,67 @@
+// --- Tu lista de Modelos en orden de prioridad ---
+// Usamos modelos públicos confirmados para asegurar la funcionalidad.
+const MODELOS_GEMINI = [
+  'gemini-2.5-pro',
+  'gemini-2.5-flash',
+  'gemini-2-pro',
+  'gemini-2',
+  'gemini-1.5-pro-latest',
+  'gemini-1.5-flash-latest'
+];
+
+
+hola mundo en el top 15 lenguajes de programacion 
+
+dame un login con validacion el mismo codigo con html5, css, js
+
+  <!-- ✅ FIX 1: SCRIPT DE PRISM CORREGIDO -->
+  <!-- Se reemplaza prism-core y autoloader por un único script que ya incluye los lenguajes más populares. -->
+  <!-- Esto es mucho más rápido y fiable. -->
+   <!-- Carga de librerías JavaScript externas al final del body para asegurar que el DOM esté cargado antes de ejecutarlas -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Carga la librería Marked.js (desde un CDN) para convertir texto en formato Markdown a HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <!-- Carga el núcleo de la librería Prism.js (desde un CDN) para el resaltado de sintaxis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <!-- Carga el plugin Autoloader de Prism.js, que permite cargar automáticamente las definiciones de lenguaje necesarias para el resaltado -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- Carga el plugin de números de línea de Prism.js para mostrar números de línea en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <!-- Carga el plugin de resaltado de líneas de Prism.js para resaltar líneas específicas en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <!-- Carga el plugin de barra de herramientas de Prism.js para añadir botones de copiar y descargar en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>    
+    <!-- Carga el plugin de copiar al portapapeles de Prism.js para permitir copiar el código directamente desde los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
+    <!-- Carga el plugin de marcado sin escapar de Prism.js para permitir el uso de HTML sin que Prism lo escape -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js"></script>
+    <!-- Carga el plugin de mantener marcado de Prism.js para preservar el marcado HTML dentro de los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+    <!-- Carga el plugin de normalización de espacios en blanco de Prism.js para manejar espacios en blanco en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/command-line/prism-command-line.min.js"></script>
+    <!-- Carga el plugin de línea de comandos de Prism.js para formatear bloques de código como comandos de terminal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/markdown/prism-markdown.min.js"></script>
+    <!-- Carga el plugin de Markdown de Prism.js para resaltar sintaxis de Markdown dentro  de los bloques de código -->                    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <!-- Carga el plugin de barra de herramientas de Prism.js para añadir botones de copiar y descargar en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <!-- Carga el plugin de resaltado de líneas de Prism.js para resaltar líneas específicas en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- Carga el plugin de números de línea de Prism.js para mostrar números de línea en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
+    <!-- Carga el plugin de marcado sin escapar de Prism.js para permitir el uso de HTML sin que Prism lo escape -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/keep-markup/prism-keep-markup.min.js"></script>
+    <!-- Carga el plugin de mantener marcado de Prism.js para preservar el marcado HTML dentro de los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+    <!-- Carga el plugin de normalización de espacios en blanco de Prism.js para manejar espacios en blanco en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/command-line/prism-command-line.min.js"></script>
+    <!-- Carga el plugin de línea de comandos de Prism.js para formatear bloques de código como comandos de terminal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/markdown/prism-markdown.min.js"></script>
+    <!-- Carga el plugin de Markdown de Prism.js para resaltar sintaxis de Markdown dentro de los bloques de código -->     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>  
+    <!-- Carga el autoloader de Prism.js para cargar automáticamente los lenguajes necesarios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <!-- Carga el plugin de números de línea de Prism.js para mostrar números de línea en los bloques de código -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+    <!-- Carga el plugin de resaltado de líneas de Prism.js para resaltar líneas específicas en los bloques de código -->           
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>    
