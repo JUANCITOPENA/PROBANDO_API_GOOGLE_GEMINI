@@ -4,11 +4,9 @@ const axios = require('axios');
 // --- Configuración CORS ---
 const allowCors = (fn) => async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*'); // ⚠️ Cambia en producción
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -16,86 +14,107 @@ const allowCors = (fn) => async (req, res) => {
   return await fn(req, res);
 };
 
-// --- Tu lista de Modelos en orden de prioridad ---
-// Usamos modelos públicos confirmados para asegurar la funcionalidad. 
-const MODELOS_GEMINI = [
-  'gemini-2.5-pro',
-  'gemini-2.5-flash',
-  'gemini-2-pro',
-  'gemini-2',
-  'gemini-1.5-pro-latest',
-  'gemini-1.5-flash-latest'
+// ✅ CORRECCIÓN: Lista Maestra actualizada con los modelos más recientes de Gemini 2.5.
+// El orden es de mayor a menor capacidad/costo.
+const ALL_MODELS = [
+  'gemini-2.5-pro',         // El más nuevo y potente
+  'gemini-2.5-flash',       // El más nuevo y rápido
+  'gemini-1.5-pro-latest',    // Fallback potente de la generación anterior
+  'gemini-1.5-flash-latest',  // Fallback rápido de la generación anterior
+  'gemini-pro'                // Fallback final, el más antiguo
 ];
 
+/**
+ * Elige dinámicamente el ORDEN de los modelos a probar.
+ * @param {number} totalChars - El número total de caracteres en la conversación.
+ * @returns {string[]} Una lista ordenada de todos los modelos a probar.
+ */
+const getDynamicModelList = (totalChars) => {
+  // Umbral ajustado: si la conversación tiene más de 4000 caracteres, usamos Pro.
+  const THRESHOLD = 4000;
 
-// --- Delay entre reintentos ---
+  if (totalChars > THRESHOLD) {
+    console.log(`🤖 Conversación larga (${totalChars} chars). Priorizando Pro: ${ALL_MODELS[0]}.`);
+    // El orden por defecto es ideal para prompts largos: 2.5 Pro, 1.5 Pro, etc.
+    return [
+        ALL_MODELS[0], // gemini-2.5-pro
+        ALL_MODELS[2], // gemini-1.5-pro-latest
+        ALL_MODELS[1], // gemini-2.5-flash
+        ALL_MODELS[3], // gemini-1.5-flash-latest
+        ALL_MODELS[4], // gemini-pro
+    ];
+  } else {
+    console.log(`⚡ Conversación corta (${totalChars} chars). Priorizando Flash: ${ALL_MODELS[1]}.`);
+    // Para prompts cortos, priorizamos los modelos Flash por velocidad.
+    return [
+        ALL_MODELS[1], // gemini-2.5-flash
+        ALL_MODELS[3], // gemini-1.5-flash-latest
+        ALL_MODELS[0], // gemini-2.5-pro
+        ALL_MODELS[2], // gemini-1.5-pro-latest
+        ALL_MODELS[4], // gemini-pro
+    ];
+  }
+};
+
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// --- Lógica de Fallback con validación de respuesta COMPLETA ---
-const fetchFromModels = async (prompt, apiKey) => {
+const fetchFromModels = async (messages, modelList) => {
   let lastError = null;
 
-  for (let model of MODELOS_GEMINI) {
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    console.log(`🚀 Probando modelo: ${model}`);
+  for (let model of modelList) {
+    // El endpoint v1beta es compatible con todos estos modelos.
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GOOGLE_API_KEY}`;
+    console.log(`🚀 Probando modelo para chat: ${model}`);
 
     try {
-      const response = await axios.post(
-        apiUrl,
-        {
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 8192 // Límite alto para asegurar respuestas completas
-          }
+      const response = await axios.post(apiUrl, {
+        contents: messages,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 8192,
         },
-        { 
-            headers: { 'Content-Type': 'application/json' },
-            timeout: 30000 // Timeout de 30 segundos para dar tiempo a respuestas largas
-        }
-      );
+        safetySettings: [
+          { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+          { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+          { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+          { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" }
+        ]
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 45000,
+      });
 
-      // --- Validación Avanzada ---
       const candidate = response.data?.candidates?.[0];
-      const textResult = candidate?.content?.parts?.[0]?.text;
+      const hasTextResult = candidate?.content?.parts?.some(p => p.text);
       const finishReason = candidate?.finishReason;
 
-      // Condición de Éxito: Hay texto Y la razón de finalización NO es por límite de tokens.
-      if (textResult && finishReason !== 'MAX_TOKENS') {
-        console.log(`✅ Respuesta completa y válida de ${model}. Razón: ${finishReason}`);
+      if (hasTextResult && (finishReason === 'STOP' || finishReason === 'MAX_TOKENS')) {
+        console.log(`✅ Respuesta válida de ${model}. (Razón: ${finishReason})`);
         return response.data;
       }
       
-      if (finishReason === 'MAX_TOKENS') {
-        console.warn(`⚠️ Respuesta de ${model} cortada por límite de tokens. Probando siguiente...`);
-        lastError = new Error(`Respuesta incompleta (MAX_TOKENS) de ${model}`);
-        continue;
-      }
-      
-      console.warn(`⚠️ Contenido vacío o inválido de ${model}. Razón: ${finishReason}`);
-      lastError = new Error(`Respuesta vacía o bloqueada (${finishReason}) de ${model}`);
+      lastError = new Error(`Respuesta vacía o bloqueada de ${model} (Razón: ${finishReason || 'Desconocida'})`);
+      console.warn(`⚠️ ${lastError.message}. Probando siguiente modelo...`);
       continue;
 
     } catch (error) {
       lastError = error;
       const status = error.response?.status || 500;
-      const message = error.response?.data?.error?.message || 'Sin detalles';
+      const errorMessage = error.response?.data?.error?.message || error.message;
 
-      console.warn(`❌ Error en ${model} [${status}]: ${message}`);
-      // Reintentamos con el siguiente modelo si es un error del servidor, de cuota o no encontrado.
-      if ([429, 503, 404].includes(status) || status >= 500) {
-        await delay(1000);
-        continue;
+      console.warn(`❌ Error en ${model} [${status}]: ${errorMessage}. Probando siguiente...`);
+      
+      if (status === 400) {
+        throw error;
       }
       
-      // Otro tipo de error (ej. 400 Bad Request) no se reintenta y se lanza para ser manejado abajo.
-      throw error;
+      await delay(500);
+      continue;
     }
   }
 
-  // Si el bucle termina, es porque todos los modelos de la lista fallaron.
-  console.error('⛔ Todos los modelos fallaron o no devolvieron contenido válido.');
-  throw lastError;
+  console.error('⛔ Todos los modelos en la lista fallaron.');
+  throw lastError || new Error('No se pudo obtener una respuesta de ningún modelo de IA.');
 };
 
 // --- Handler principal ---
@@ -105,8 +124,10 @@ const handler = async (req, res) => {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  const { prompt } = req.body;
-  if (!prompt) return res.status(400).json({ error: 'El campo "prompt" es requerido.' });
+  const { messages } = req.body;
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ error: 'El campo "messages" es requerido y debe ser un array no vacío.' });
+  }
 
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) {
@@ -115,22 +136,21 @@ const handler = async (req, res) => {
   }
 
   try {
-    const responseData = await fetchFromModels(prompt, apiKey);
+    const totalChars = messages.reduce((acc, msg) => acc + (msg.parts[0].text ? msg.parts[0].text.length : 0), 0);
+    const modelList = getDynamicModelList(totalChars);
+
+    const responseData = await fetchFromModels(messages, modelList);
     return res.status(200).json(responseData);
 
   } catch (error) {
-    console.error('💥 Error final:', error.message);
+    console.error('💥 Error final en el handler:', error.message);
     const statusCode = error.response?.status || 500;
-    let errorMessage = error.response?.data?.error?.message || 'No se pudo obtener una respuesta válida de los modelos. Intenta nuevamente.';
+    let errorMessage = error.response?.data?.error?.message || 'No se pudo obtener una respuesta de los modelos. Intenta nuevamente.';
 
-    if (statusCode === 429) {
-      errorMessage = 'Has excedido la cuota de solicitudes. Espera un momento.';
-    } else if (statusCode === 400) {
-      errorMessage = 'Solicitud inválida. Revisa tu prompt, puede contener información sensible.';
-    } else if (error.code === 'ECONNABORTED') {
-      errorMessage = 'La solicitud tardó demasiado en responder (Timeout). Inténtalo de nuevo.';
-    }
-
+    if (statusCode === 429) errorMessage = 'Se ha excedido la cuota de solicitudes. Espera un momento.';
+    else if (statusCode === 400) errorMessage = 'Solicitud inválida. Revisa el contenido, puede contener información sensible.';
+    else if (error.code === 'ECONNABORTED') errorMessage = 'La solicitud tardó demasiado en responder (Timeout).';
+    
     return res.status(statusCode).json({ error: errorMessage });
   }
 };

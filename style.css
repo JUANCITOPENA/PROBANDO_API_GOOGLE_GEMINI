@@ -8,7 +8,7 @@
   --primary-color-darker: #2980b9;
   --danger-color: #e74c3c;
   --danger-color-darker: #c0392b;
-  --info-color: #0dcaf0;
+  --info-color: #0dcaf0; 
   --info-color-darker: #0aa3c2;
   --success-color: #198754;
   --success-color-darker: #157347;
@@ -40,8 +40,8 @@
   --shadow-button-hover: 0 2px 5px rgba(0, 0, 0, 0.2);
   --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  --base-font-size: 17px;
-  --line-height-normal: 1.6;
+  --base-font-size: 16px; /* CORRECCIÓN: Ligeramente reducido */
+  --line-height-normal: 1.5; /* CORRECCIÓN: Reducido para texto más denso */
   --spacing-unit: 8px;
   --button-padding-y: 10px;
   --button-padding-x: 20px;
@@ -119,9 +119,41 @@ body {
 .history-panel.open {
   transform: translateX(0);
 }
-.history-header {
-  padding: 15px;
+
+/* CORRECCIÓN: Nueva sección para acciones del historial */
+.history-actions {
+  padding: 10px;
   border-bottom: 1px solid var(--border-color-light);
+}
+
+#newChatBtn {
+  background-color: var(--info-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-standard);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  display: flex; /* Cambiado a flex para centrar contenido */
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-unit);
+  width: 100%; /* Ocupa todo el ancho */
+  padding-top: var(--button-padding-y);
+  padding-bottom: var(--button-padding-y);
+}
+#newChatBtn:hover {
+    background-color: var(--info-color-darker);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-button-hover);
+}
+[data-theme="dark"] #newChatBtn {
+    color: var(--text-color-dark);
+}
+
+/* CORRECCIÓN: Cabecera del historial simplificada */
+.history-header {
+  padding: 15px 15px 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,6 +161,7 @@ body {
 .history-header h3 {
   color: var(--text-color-dark);
   margin: 0;
+  font-size: 1.1em;
 }
 #clearHistoryBtn {
     background: none;
@@ -136,14 +169,18 @@ body {
     cursor: pointer;
     font-size: 1.2rem;
     padding: 5px;
-    color: var(--text-color-normal);
+    color: var(--secondary-color);
 }
+#clearHistoryBtn:hover {
+    color: var(--danger-color);
+}
+
 .history-list {
   flex-grow: 1;
   overflow-y: auto;
 }
 .history-item {
-  padding: 12px 15px;
+  padding: 10px 15px; /* CORRECCIÓN: Espaciado reducido */
   border-bottom: 1px solid var(--border-color-light);
   cursor: pointer;
   white-space: nowrap;
@@ -160,6 +197,8 @@ body {
   color: var(--secondary-color);
   font-style: italic;
 }
+
+/* CORRECCIÓN: El menú hamburguesa ahora está solo y bien posicionado */
 .menu-toggle {
   position: fixed;
   top: 15px;
@@ -190,7 +229,8 @@ body {
    ========================================== */
 .main-content {
   width: 100%;
-  padding: calc(var(--spacing-unit) * 2.5);
+  padding: var(--spacing-unit);
+  padding-top: calc(15px + 40px + 15px); /* CORRECCIÓN: Deja espacio para el botón de menú */
   transition: margin-left var(--transition-speed) ease-in-out;
 }
 .main-content.history-open {
@@ -208,7 +248,7 @@ body {
 h1 {
   text-align: center;
   color: var(--text-color-dark);
-  margin-bottom: calc(var(--spacing-unit) * 4);
+  margin-bottom: calc(var(--spacing-unit) * 3);
   font-weight: 600;
   transition: color var(--transition-speed) ease;
 }
@@ -386,54 +426,107 @@ button:disabled {
   font-weight: 600;
 }
 .result-box {
-  padding: calc(var(--spacing-unit) * 2);
+  padding: var(--spacing-unit); /* CORRECCIÓN: Padding reducido */
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-standard);
-  background-color: var(--background-color-result);
+  background-color: var(--background-color-body); /* CORRECCIÓN: Fondo más neutro */
   min-height: 150px;
   font-family: var(--font-family-sans);
   color: var(--text-color-normal);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-unit); /* CORRECCIÓN: Espacio entre mensajes reducido */
 }
-.result-box .error-message {
-  color: var(--text-color-error);
-  font-weight: bold;
+[data-theme="dark"] .result-box {
+  background-color: #2c3e50; /* Match body color */
 }
-.result-box strong { color: var(--text-color-dark); font-weight: 600; }
-.result-box a { color: var(--primary-color); text-decoration: none; }
-.result-box a:hover { text-decoration: underline; color: var(--primary-color-darker); }
-.result-box table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1em 0;
+
+/* Chat Message Styles */
+.chat-message {
+    padding: calc(var(--spacing-unit) * 1.5); /* CORRECCIÓN: 12px de padding */
+    border-radius: var(--border-radius-standard);
 }
-.result-box th, .result-box td {
-  border: 1px solid var(--border-color-medium);
-  padding: 8px;
-  text-align: left;
+
+.chat-message .message-header {
+    font-size: 0.85em; /* CORRECCIÓN: Ligeramente más pequeño */
+    color: var(--secondary-color);
+    margin-bottom: calc(var(--spacing-unit) / 2); /* CORRECCIÓN: Margen reducido */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.result-box th {
-  background-color: var(--background-color-code);
-  font-weight: bold;
+.chat-message .message-header strong {
+    color: var(--text-color-dark);
+    font-size: 1.1em;
 }
-.result-box tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
-[data-theme="dark"] .result-box tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+.chat-message .timestamp {
+    font-size: 0.9em;
+    color: var(--text-color-light);
+}
+
+.chat-message .message-content {
+    line-height: var(--line-height-normal);
+    color: var(--text-color-normal);
+}
+
+/* CORRECCIÓN: Control de espaciado para elementos generados por Markdown */
+.chat-message .message-content > *:first-child {
+  margin-top: 0;
+}
+.chat-message .message-content > *:last-child {
+  margin-bottom: 0;
+}
+.chat-message .message-content p,
+.chat-message .message-content ul,
+.chat-message .message-content ol,
+.chat-message .message-content pre {
+  margin-bottom: calc(var(--spacing-unit) * 1.25); /* 10px de margen inferior */
+}
+.chat-message .message-content ul,
+.chat-message .message-content ol {
+  padding-left: 20px;
+}
+
+.user-message {
+    background-color: var(--background-color-result);
+    border: 1px solid var(--border-color-light);
+}
+.user-message .message-header strong {
+    color: var(--primary-color);
+}
+.model-message {
+    background-color: var(--background-color-container);
+    border: 1px solid var(--border-color-medium);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.model-message .message-header strong {
+    color: var(--success-color);
+}
+.error-message-display {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+.error-message-display .message-header strong {
+    color: var(--danger-color);
+}
+
 
 /* ==========================================
    8. Bloques de Código (Prism) y Plugins
    ========================================== */
-.result-box pre[class*="language-"] {
+pre[class*="language-"] {
   position: relative;
   font-family: var(--font-family-mono);
   overflow: auto;
-  padding: 1em; 
+  padding: 1em !important; /* CORRECCIÓN: important para sobreescribir prism */
+  margin: 0.5em 0;
+  border-radius: var(--border-radius-standard);
 }
 
-/* Ajuste para el plugin de números de línea */
 pre.line-numbers {
-  padding-left: 3.8em;
+  padding-left: 3.8em !important;
 }
 
 div.code-toolbar {
@@ -446,17 +539,16 @@ div.code-toolbar > .toolbar {
   right: 0.5em;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  z-index: 3; /* Asegura que esté sobre los números de línea */
+  z-index: 3;
 }
 
 div.code-toolbar:hover > .toolbar {
   opacity: 1;
 }
 
-/* ✅ FIX: Estilo del botón de copiar de Prism */
 div.code-toolbar > .toolbar .toolbar-item > button {
   background: var(--background-color-button-toggle);
-  color: var(--text-color-dark); /* Texto oscuro para tema claro */
+  color: var(--text-color-dark);
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-standard);
   padding: 0.3em 0.6em;
@@ -464,28 +556,18 @@ div.code-toolbar > .toolbar .toolbar-item > button {
   cursor: pointer;
   box-shadow: none;
 }
-
-/* ✅ FIX: Estilo para el tema oscuro */
 [data-theme="dark"] div.code-toolbar > .toolbar .toolbar-item > button {
-    background: #5c6e80; /* Un gris medio oscuro */
-    color: var(--text-color-dark); /* Texto claro */
+    background: #5c6e80;
+    color: var(--text-color-dark);
     border-color: #789;
 }
-
-/* Estilo hover para ambos temas */
 div.code-toolbar > .toolbar .toolbar-item > button:hover {
   background: var(--primary-color) !important;
   color: #fff !important;
   border-color: transparent !important;
 }
-
 [data-theme="dark"] div.code-toolbar > .toolbar .toolbar-item > button:hover {
   background: var(--primary-color-darker) !important;
-}
-
-/* Ocultar el botón de copiar que hacíamos manualmente */
-.copy-code-btn {
-    display: none;
 }
 
 
@@ -528,6 +610,7 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
   .main-content {
     margin-left: 0 !important;
     padding: 15px;
+    padding-top: 70px; /* CORRECCIÓN: Espacio para el botón de menú */
   }
   .main-content.history-open {
     transform: translateX(var(--history-panel-width));
@@ -550,7 +633,7 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
 /* ==========================================
    11. Mejoras de Contraste para Prism en Modo Oscuro
    ========================================== */
-[data-theme="dark"] .result-box pre[class*="language-"] {
+[data-theme="dark"] pre[class*="language-"] {
     background: #2d2d2d;
     color: #ccc;
     border: 1px solid #4a637d;
@@ -593,7 +676,7 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
 }
 [data-theme="dark"] .token.atrule,
 [data-theme="dark"] .token.attr-value,
-[data-theme="dark"] .token.function,
+[data-theme="d ark"] .token.function,
 [data-theme="dark"] .token.class-name {
   color: #e6db74;
 }
@@ -603,4 +686,23 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
 [data-theme="dark"] .token.regex,
 [data-theme="dark"] .token.important {
   color: #fd971f;
+}
+
+[data-theme="dark"] .user-message {
+    background-color: var(--background-color-input);
+    border-color: var(--border-color-medium);
+}
+[data-theme="dark"] .user-message .message-header strong {
+    color: var(--primary-color-darker);
+}
+[data-theme="dark"] .model-message {
+    background-color: var(--background-color-result);
+    border-color: var(--border-color-light);
+}
+[data-theme="dark"] .model-message .message-header strong {
+    color: var(--success-color-darker);
+}
+[data-theme="dark"] .error-message-display {
+    background-color: rgba(241, 148, 138, 0.1);
+    border-color: var(--danger-color-darker);
 }
