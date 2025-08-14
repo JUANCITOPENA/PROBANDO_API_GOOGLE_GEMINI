@@ -3,7 +3,7 @@
 
 Esta es una aplicación web básica que permite a los usuarios enviar consultas a la **API de Google Gemini** y ver las respuestas. Utiliza un frontend simple (HTML, CSS, JS) y un backend serverless (Node.js) que se ejecuta localmente simulando el entorno de Vercel con `vercel dev`.
 
-### Pruebala desde Aqui: https://y-82px6cxly-juancito-peas-projects.vercel.app/
+### Pruebala desde Aqui: https://probando-api-google-gemini.vercel.app/
 
 ## 📋 Prerrequisitos
 
