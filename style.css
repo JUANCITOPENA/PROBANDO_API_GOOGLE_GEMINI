@@ -308,11 +308,15 @@ h1 {
   100% { transform: scale(1); }
 }
 
+/* --- REGLA AJUSTADA --- */
+/* Esta regla ahora se aplica a AMBOS grupos de botones */
 .button-group, .result-actions {
   display: flex;
+  align-items: center; /* Asegura alineación vertical */
   gap: calc(var(--spacing-unit) * 1.5);
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite que los botones se reordenen en pantallas pequeñas */
 }
+
 button, .dropdown-toggle {
   display: inline-flex;
   align-items: center;
@@ -411,12 +415,15 @@ button:disabled {
    7. Sección de Resultados y Tablas
    ========================================== */
 .result-container { margin-top: calc(var(--spacing-unit) * 2); }
+
+/* --- REGLA AJUSTADA --- */
+/* Esta regla posiciona el Título a la izquierda y el grupo de Acciones a la derecha */
 .result-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Clave para separar los elementos */
   align-items: center;
   margin-bottom: var(--spacing-unit);
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Permite que el bloque de acciones pase abajo en pantallas muy pequeñas */
   gap: var(--spacing-unit);
 }
 .result-header h3 {
@@ -620,14 +627,22 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
   }
   .container { padding: 15px; }
   h1 { font-size: 1.5em; }
+
+  /* --- REGLA AJUSTADA --- */
+  /* En móvil, los grupos de botones se centran en lugar de estar en los extremos */
   .button-group, .result-actions {
     justify-content: center;
   }
-  .button-group button {
-    flex-grow: 1;
+  .button-group button, .result-actions > * {
+    flex-grow: 1; /* Permite que los botones crezcan y ocupen el espacio equitativamente */
   }
-  .dropdown { width: 100%; }
-  .dropdown-toggle { width: 100%; }
+  .dropdown { 
+      flex-grow: 1; /* Asegura que el contenedor del dropdown también crezca */
+      display: flex;
+  }
+  .dropdown-toggle { 
+      width: 100%; /* El botón interno ocupa todo el espacio de su contenedor */
+  }
 }
 
 /* ==========================================
