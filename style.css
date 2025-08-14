@@ -719,3 +719,27 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
 [data-theme="dark"] .prompt-area {
     color: #FFFFFF;
 }
+
+/* ===============================================================
+   12. AJUSTE: Placeholder del Prompt en Modo Oscuro
+   =============================================================== */
+   
+/*
+  Este bloque se dirige específicamente al placeholder del área de texto
+  cuando el tema oscuro está activo.
+*/
+[data-theme="dark"] .prompt-area::placeholder {
+  color: #FFFFFF !important;      /* 1. Cambia el color a blanco puro */
+  opacity: 1 !important;           /* 2. CRÍTICO: Elimina la transparencia que lo hace ver "mudo" */
+  font-size: 14px !important;      /* 3. Lo hace un poco más pequeño que el texto normal (que es de 18px) */
+}
+
+/* Fallback para navegadores más antiguos (buena práctica) */
+[data-theme="dark"] .prompt-area::-webkit-input-placeholder {
+  color: #FFFFFF !important;
+  font-size: 14px !important;
+}
+[data-theme="dark"] .prompt-area:-ms-input-placeholder {
+  color: #FFFFFF !important;
+  font-size: 14px !important;
+}
