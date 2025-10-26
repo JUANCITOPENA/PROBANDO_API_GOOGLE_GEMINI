@@ -13,6 +13,113 @@
 
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <style>
+    /* Avatar */
+    .avatar-container {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .avatar-container img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px double #00fff7;
+      box-shadow: 0 0 10px #00fff7;
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-container img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 255, 247, 0.1);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .modal-content {
+      background-color: #1a1a1a;
+      margin: 10% auto;
+      padding: 20px;
+      border: 3px double #00fff7;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 0 20px #00fff7;
+      border-radius: 10px;
+      animation: slideUp 0.5s ease;
+    }
+
+    .modal-content h2 {
+      color: #ff00ff;
+      text-shadow: 0 0 5px #ff00ff;
+    }
+
+    .modal-content p {
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    .services {
+      margin-top: 15px;
+      color: #00ff99;
+    }
+
+    .social-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .social-buttons a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px 15px;
+      border: 2px double #ff00ff;
+      border-radius: 5px;
+      background-color: #222;
+      box-shadow: 0 0 10px #ff00ff;
+      transition: background 0.3s ease;
+    }
+
+    .social-buttons a:hover {
+      background-color: #ff00ff;
+      color: #000;
+    }
+
+    .close {
+      color: #ff00ff;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes slideUp {
+      from {transform: translateY(50px);}
+      to {transform: translateY(0);}
+    }
+  </style>
 </head>
 
 <body>
@@ -48,9 +155,55 @@
       </div>
       
       <div class="container">
+
+
         <div style="text-align: center;">
           <img src="https://avatars.githubusercontent.com/u/38921558?v=4" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;">
         </div>
+
+
+ <div class="avatar-container">
+    <img src="https://avatars.githubusercontent.com/u/38921558?v=4" alt="Avatar" id="openModal">
+  </div>
+
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Juancito Peña Vizcaíno</h2>
+      <p><strong>Profesión:</strong> Desarrollador Full-Stack, Analista de Datos, Tutor</p>
+      <p><strong>Bio:</strong> Mentor creativo y estratega digital con pasión por transformar historias en cápsulas educativas virales. Líder en branding, motivación y desarrollo técnico con impacto visual.</p>
+      <div class="services">
+        <p><strong>Servicios:</strong></p>
+        <ul>
+          <li>Desarrollo de apps modulares</li>
+          <li>Dashboards y simulaciones en Excel</li>
+          <li>Producción de series educativas y motivacionales</li>
+          <li>Mentoría técnica y narrativa</li>
+        </ul>
+      </div>
+      <div class="social-buttons">
+        <a href="https://github.com/juancitopv" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://youtube.com" target="_blank">YouTube</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const modal = document.getElementById("profileModal");
+    const openBtn = document.getElementById("openModal");
+    const closeBtn = document.getElementById("closeModal");
+
+    openBtn.onclick = () => modal.style.display = "block";
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (event) => {
+      if (event.target == modal) modal.style.display = "none";
+    };
+  </script>
+
+
         <h1>🛠️ Asistente con AI😃🚀</h1>
         <!-- Párrafo modificado con los estilos en línea -->
           <p style="text-align: center; font-size: 1.2rem; font-weight: 600; background: linear-gradient(90deg, #4f46e5, #a855f7, #ec4899, #22d3ee); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: ai-gradient-animation 5s ease infinite;">
