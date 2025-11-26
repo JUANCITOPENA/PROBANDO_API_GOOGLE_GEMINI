@@ -205,67 +205,65 @@ Este archivo define la **estructura y el contenido** de la página web que el us
 
 <body>
   <div class="app-wrapper">
+    <!-- CORRECCIÓN: Estructura del panel del historial actualizada -->
     <aside class="history-panel" id="historyPanel">
+      <div class="history-actions">
+        <button id="newChatBtn" title="Iniciar un nuevo chat">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+            Nuevo Chat
+        </button>
+      </div>
       <div class="history-header">
-        <h3>Historial de Chats</h3>
+        <h3>Historial</h3>
         <button id="clearHistoryBtn" title="Limpiar historial">🗑️</button>
       </div>
       <div class="history-list" id="historyList"></div>
     </aside>
 
+    <!-- CORRECCIÓN: El botón de menú ahora está fuera del main-content para un mejor posicionamiento -->
+    <button id="menuToggle" class="menu-toggle" title="Mostrar/Ocultar Historial">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <main class="main-content" id="mainContent">
       <div class="theme-toggle-container">
         <button id="themeToggle" title="Cambiar modo claro/oscuro">🌞</button>
       </div>
-      <button id="menuToggle" class="menu-toggle" title="Mostrar/Ocultar Historial">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      
       <div class="container">
         <div style="text-align: center;">
-          <img src="https://avatars.githubusercontent.com/u/38921558?v=4" alt="Avatar" style="width: 70px; height: 70px; border-radius: 50%;">
+          <img src="https://avatars.githubusercontent.com/u/38921558?v=4" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;">
         </div>
-        <h1>🛠️ Creando una Interfaz Personalizada con la API de Google 😃🚀</h1>
 
-        <div class="prompt-section">
-          <div class="prompt-container">
-            <textarea class="prompt-area" id="promptInput" placeholder="Escribe tu consulta o usa el micrófono..." rows="1"></textarea>
-            <button id="micBtn" class="mic-btn" title="Activar micrófono">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
-                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
-                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
-              </svg>
-            </button>
-          </div>
-          <br>
-          <div class="button-group">
-            <button id="executeBtn" title="Enviar consulta">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16"><path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/></svg>
-              Enviar
-            </button>
-            <button id="clearBtn" title="Limpiar consulta y resultado">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser" viewBox="0 0 16 16"><path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z"/></svg>
-              Limpiar
-            </button>
-          </div>
-        </div>
+
+
+
+        <h1>🛠️ Asistente con AI😃🚀</h1>
+        <!-- Párrafo modificado con los estilos en línea -->
+          <p style="text-align: center; font-size: 1.2rem; font-weight: 600; background: linear-gradient(90deg, #4f46e5, #a855f7, #ec4899, #22d3ee); background-size: 200% 200%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: ai-gradient-animation 5s ease infinite;">
+            Pregúntame lo que quieras. ¡Estoy aquí para ayudarte! 🚀
+          </p>
+<br>
+     
         <div class="result-container">
           <div class="result-header">
-            <h3>Respuesta de la IA 🤖:</h3>
+            <h3>Conversación con la IA 🤖:</h3>
             <div class="result-actions">
-              <button id="copyBtn" title="Copiar todo el resultado" class="flurente-button" disabled>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-clipboard" viewBox="0 0 16 16">
+              <button id="copyBtn" title="Copiar toda la conversación" class="flurente-button" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
                     <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
                     <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
                 </svg>
                 <span class="copy-text">✨ Copiar Todo</span>
-                </button>
+              </button>
               <div class="dropdown" id="downloadDropdown">
                 <button id="saveBtn" class="flurente-green-button dropdown-toggle" title="Guardar como..." disabled>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-download" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
                 </svg>
@@ -281,9 +279,39 @@ Este archivo define la **estructura y el contenido** de la página web que el us
           </div>
           <div id="resultBox" class="result-box">Esperando consulta...</div>
         </div>
+<br>
+        <div class="prompt-container">
+            <textarea class="prompt-area" id="promptInput" placeholder="Escribe tu consulta o usa el micrófono..." rows="1"></textarea>
+            <button id="micBtn" class="mic-btn" title="Activar micrófono">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+            </button>
+          </div>
+
+<div class="prompt-section">
+          
+          <br>
+          <div class="button-group">
+            <button id="executeBtn" title="Enviar consulta">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16"><path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/></svg>
+              Enviar
+            </button>
+            <button id="clearBtn" title="Limpiar consulta actual">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser" viewBox="0 0 16 16"><path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293z"/></svg>
+              Limpiar
+            </button>
+          </div>
+        </div>
+
       </div>
+
+         
+
     </main>
   </div>
+  
 
   <div class="loading" id="loading" style="display: none;">
     <div class="spinner"></div>
@@ -292,16 +320,43 @@ Este archivo define la **estructura y el contenido** de la página web que el us
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   
+
+   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- ✅ CORRECCIÓN: Se usa Autoloader para cargar dinámicamente CUALQUIER lenguaje que la IA genere -->
+  <!-- Esto es más flexible que pre-cargar una lista fija -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+  
+  
   <!-- Scripts de Prism y Plugins (Método robusto) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
+  <!-- ... (El resto de tu HTML termina aquí, justo antes de los scripts) ... -->
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- ✅ CORRECCIÓN: Se usa Autoloader para cargar dinámicamente CUALQUIER lenguaje que la IA genere -->
+  <!-- Esto es más flexible que pre-cargar una lista fija -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+  <!-- Plugins que dependen de Prism Core -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  
+  <!-- Tu código JavaScript de la aplicación -->
   <script>
     // --- Referencias a elementos del DOM ---
     const executeBtn = document.getElementById('executeBtn');
     const clearBtn = document.getElementById('clearBtn');
+    const newChatBtn = document.getElementById('newChatBtn');
     const promptInput = document.getElementById('promptInput');
     const resultBox = document.getElementById('resultBox');
     const loadingIndicator = document.getElementById('loading');
@@ -319,32 +374,24 @@ Este archivo define la **estructura y el contenido** de la página web que el us
     const micBtn = document.getElementById('micBtn');
     const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 
+    let currentChatHistory = [];
+
     // --- Lógica de Reconocimiento de Voz ---
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    let recognition;
     if (SpeechRecognition) {
-        recognition = new SpeechRecognition();
-        recognition.continuous = true;
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
         recognition.lang = 'es-ES';
-        recognition.interimResults = true;
+        recognition.interimResults = false;
         micBtn.addEventListener('click', () => {
             micBtn.classList.contains('is-listening') ? recognition.stop() : recognition.start();
         });
-        recognition.onstart = () => {
-            micBtn.classList.add('is-listening');
-            promptInput.placeholder = "Escuchando...";
-        };
-        recognition.onend = () => {
-            micBtn.classList.remove('is-listening');
-            promptInput.placeholder = "Escribe tu consulta o usa el micrófono...";
-        };
-        recognition.onerror = (event) => console.error('Error en reconocimiento de voz:', event.error);
+        recognition.onstart = () => { micBtn.classList.add('is-listening'); promptInput.placeholder = "Escuchando..."; };
+        recognition.onend = () => { micBtn.classList.remove('is-listening'); promptInput.placeholder = "Escribe tu consulta o usa el micrófono..."; };
+        recognition.onerror = (event) => { console.error('Error en reconocimiento de voz:', event.error); showNotification(`Error de micrófono: ${event.error}`); };
         recognition.onresult = (event) => {
-            let finalTranscript = '';
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
-            }
-            promptInput.value += finalTranscript;
+            const transcript = event.results[0][0].transcript;
+            promptInput.value += (promptInput.value ? ' ' : '') + transcript;
             promptInput.dispatchEvent(new Event('input'));
         };
     } else {
@@ -359,7 +406,6 @@ Este archivo define la **estructura y el contenido** de la página web que el us
         themeToggleBtn.textContent = targetTheme === 'light' ? '🌞' : '🌜';
         updatePrismTheme(targetTheme);
     });
-
     function updatePrismTheme(theme) {
         const prismLink = document.getElementById('prism-theme');
         if (prismLink) {
@@ -368,28 +414,25 @@ Este archivo define la **estructura y el contenido** de la página web que el us
               : 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css';
         }
     }
-
     menuToggle.addEventListener('click', () => {
         historyPanel.classList.toggle('open');
         mainContent.classList.toggle('history-open');
     });
-
     promptInput.addEventListener('input', () => {
         promptInput.style.height = 'auto';
         promptInput.style.height = (promptInput.scrollHeight) + 'px';
     });
-    
     promptInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             executeBtn.click();
         }
     });
-
     clearHistoryBtn.addEventListener('click', () => {
         if (confirm('¿Estás seguro de que quieres borrar todo el historial?')) {
             localStorage.removeItem('chatHistory');
             loadHistory();
+            startNewChat();
         }
     });
 
@@ -401,15 +444,26 @@ Este archivo define la **estructura y el contenido** de la página web que el us
             historyList.innerHTML = '<div class="history-empty">No hay chats guardados.</div>';
             return;
         }
+
         history.forEach((item) => {
+            if (!item || !item.messages || item.messages.length === 0) return;
             const historyItem = document.createElement('div');
             historyItem.className = 'history-item';
-            const promptText = item.prompt.substring(0, 35) + (item.prompt.length > 35 ? '...' : '');
+            
+            const firstUserMessage = item.messages.find(m => m.role === 'user');
+            if (!firstUserMessage) return;
+
+            let title = firstUserMessage.parts[0].text;
+            const instructionMarker = "--- MI PRIMERA PREGUNTA:";
+            if (title.includes(instructionMarker)) {
+                title = title.split(instructionMarker)[1].trim();
+            }
+
+            const promptText = title.substring(0, 25) + (title.length > 25 ? '...' : '');
             historyItem.innerHTML = `<div class="history-prompt">${promptText}</div>`;
+
             historyItem.addEventListener('click', () => {
-                promptInput.value = item.prompt;
-                promptInput.dispatchEvent(new Event('input'));
-                displayResult(item.response);
+                loadChatFromHistory(item.id);
                 if (window.innerWidth <= 768) {
                     historyPanel.classList.remove('open');
                     mainContent.classList.remove('history-open');
@@ -419,106 +473,133 @@ Este archivo define la **estructura y el contenido** de la página web que el us
         });
     }
 
-    function saveToHistory(prompt, response) {
+    function saveChatToHistory() {
+        if (currentChatHistory.length === 0) return;
         let history = JSON.parse(localStorage.getItem('chatHistory')) || [];
-        history.unshift({ prompt, response });
+        const chatId = currentChatHistory.find(m => m.id)?.id || Date.now();
+        const chatData = { id: chatId, messages: currentChatHistory, timestamp: Date.now() };
+
+        const existingChatIndex = history.findIndex(chat => chat && chat.id === chatId);
+        if (existingChatIndex > -1) {
+            history[existingChatIndex] = chatData;
+        } else {
+            history.unshift(chatData);
+        }
         if (history.length > 50) history.pop();
         localStorage.setItem('chatHistory', JSON.stringify(history));
         loadHistory();
     }
 
+    function loadChatFromHistory(chatId) {
+        let history = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        const chatToLoad = history.find(chat => chat && chat.id === chatId);
+        if (chatToLoad) {
+            currentChatHistory = chatToLoad.messages;
+            resultBox.innerHTML = '';
+            
+            currentChatHistory.forEach(message => {
+                if (message.role === 'user' || message.role === 'model') {
+                    let content = message.parts[0].text;
+                    const instructionMarker = "--- MI PRIMERA PREGUNTA:";
+                    if (content.includes(instructionMarker)) {
+                        content = content.split(instructionMarker)[1].trim();
+                    }
+                    appendMessageToResultBox(message.role, content, false);
+                }
+            });
+            // ✅ CORRECCIÓN: Usar Prism.highlightAll() después de añadir todo el contenido
+            Prism.highlightAll();
+            setUIState(false);
+        }
+    }
+
+
     // --- Lógica Principal de la App ---
     executeBtn.addEventListener('click', executeQuery);
-    clearBtn.addEventListener('click', clearAll);
-    copyBtn.addEventListener('click', () => copyToClipboard(resultBox.innerText));
-    saveTxtBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsTextFile(); });
-    saveCsvBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsCsvFile(); });
-    saveXlsxBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsXlsxFile(); });
+    clearBtn.addEventListener('click', clearPromptInput);
+    newChatBtn.addEventListener('click', startNewChat);
 
     async function executeQuery() {
-        const originalPrompt = promptInput.value.trim();
-        if (!originalPrompt) return showNotification('Por favor, escribe una consulta.');
+        const userPrompt = promptInput.value.trim();
+        if (!userPrompt) {
+            showNotification('Por favor, escribe una consulta.');
+            return;
+        }
 
-        const enhancedPrompt = originalPrompt + "\n\n---\nInstrucción para la IA: Si la respuesta incluye código, formátalo siempre usando bloques de Markdown con el nombre del lenguaje especificado (ej: ```javascript ...código... ```).";
+        let promptForApi = userPrompt;
+        
+        if (currentChatHistory.length === 0) {
+            const systemInstructionText = `
+                Eres un asistente experto. Formatea tus respuestas de la siguiente manera:
+                1. CÓDIGO: Usa siempre bloques de código Markdown con el nombre del lenguaje (ej: \`\`\`javascript, \`\`\`python, \`\`\`sql).
+                2. TEXTO: Usa Markdown para estructurar (títulos ##, subtítulos ###, listas *, negritas **). Usa emojis sutiles (✅, 💡, ⚠️).
+                --- MI PRIMERA PREGUNTA:
+            `;
+            promptForApi = systemInstructionText + "\n" + userPrompt;
+            currentChatHistory.push({ id: Date.now(), role: 'user', parts: [{ text: promptForApi }] });
+        } else {
+            currentChatHistory.push({ role: 'user', parts: [{ text: promptForApi }] });
+        }
+        
+        appendMessageToResultBox('user', userPrompt);
+        promptInput.value = ''; 
+        promptInput.style.height = 'auto';
         setUIState(true);
 
         try {
             const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: enhancedPrompt }),
+                body: JSON.stringify({ messages: currentChatHistory.map(({id, ...rest}) => rest) }),
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || `Error ${response.status}`);
             
-            const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (responseText) {
-                displayResult(responseText);
-                saveToHistory(originalPrompt, responseText);
+            const modelResponseParts = data.candidates?.[0]?.content?.parts;
+            if (modelResponseParts && modelResponseParts.length > 0) {
+                const responseText = modelResponseParts.map(p => p.text).join('');
+                currentChatHistory.push({ role: 'model', parts: [{ text: responseText }] });
+                appendMessageToResultBox('model', responseText);
+                saveChatToHistory();
             } else {
-                throw new Error("El modelo no devolvió contenido de texto válido. Intenta reformular tu consulta.");
+                throw new Error("El modelo no devolvió contenido válido.");
             }
         } catch (error) {
             console.error('Error en executeQuery:', error);
-            resultBox.innerHTML = `<span class="error-message">${error.message}</span>`;
+            appendMessageToResultBox('error', `Error: ${error.message}`);
         } finally {
             setUIState(false);
         }
     }
 
-    function displayResult(text) {
-        resultBox.innerHTML = marked.parse(isCSV(text) ? renderCSVAsTable(text) : formatGeneralHTML(text));
+    function appendMessageToResultBox(role, content, highlight = true) {
+        if (resultBox.innerHTML.includes('Esperando consulta...')) {
+            resultBox.innerHTML = '';
+        }
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${role}-message`;
+        if (role === 'error') messageDiv.classList.add('error-message-display');
+        const timestamp = new Date().toLocaleTimeString('es-ES', {hour: '2-digit', minute:'2-digit'});
+        const headerText = role === 'user' ? 'Tú' : (role === 'model' ? 'IA' : 'Error');
+        const formattedContent = marked.parse(content);
+        messageDiv.innerHTML = `
+            <div class="message-header"><strong>${headerText}</strong> <span class="timestamp">${timestamp}</span></div>
+            <div class="message-content">${formattedContent}</div>`;
+        resultBox.appendChild(messageDiv);
         
-        resultBox.querySelectorAll('pre').forEach(pre => {
-            pre.classList.add('line-numbers');
-        });
-
-        Prism.highlightAllUnder(resultBox);
-    }
-    
-    // --- Funciones de Formato y Renderizado ---
-    function isCSV(text) {
-        const lines = text.trim().split('\n');
-        if (lines.length < 2) return false;
-        const delimiter = lines[0].includes(',') ? ',' : (lines[0].includes(';') ? ';' : null);
-        if (!delimiter) return false;
-        const headerCols = lines[0].split(delimiter).length;
-        return headerCols >= 2 && lines.every(line => line.split(delimiter).length === headerCols);
+        if (highlight) {
+            // ✅ CORRECCIÓN: Usar Prism.highlightAll() que funciona mejor con el autoloader
+            Prism.highlightAll();
+        }
+        
+        resultBox.scrollTop = resultBox.scrollHeight;
     }
 
-    function renderCSVAsTable(csvText) {
-        const lines = csvText.trim().split('\n');
-        const delimiter = lines[0].includes(',') ? ',' : ';';
-        let tableHtml = '<table><thead><tr>';
-        lines[0].split(delimiter).forEach(header => tableHtml += `<th>${header.trim()}</th>`);
-        tableHtml += '</tr></thead><tbody>';
-        lines.slice(1).forEach(line => {
-            tableHtml += '<tr>';
-            line.split(delimiter).forEach(cell => tableHtml += `<td>${cell.trim()}</td>`);
-            tableHtml += '</tr>';
-        });
-        tableHtml += '</tbody></table>';
-        return tableHtml;
-    }
-
-    function formatGeneralHTML(text) {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = text;
-        tempDiv.querySelectorAll('p, li').forEach(el => {
-            el.style.lineHeight = '1.5';
-            if (el.tagName === 'P') el.style.textAlign = 'justify';
-        });
-        tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
-            el.innerHTML = `<b>${el.innerHTML}</b>`;
-        });
-        let processedHtml = tempDiv.innerHTML;
-        processedHtml = processedHtml.replace(/\b(Importante)\b/gi, '⭐ $1');
-        processedHtml = processedHtml.replace(/\b(Ejemplo)\b/gi, '💡 $1');
-        processedHtml = processedHtml.replace(/\b(Nota)\b/gi, '📝 $1');
-        return processedHtml;
-    }
-
-    // --- Funciones de Utilidad (Copiar, Guardar, UI) ---
+    // --- Funciones de Utilidad (sin cambios) ---
+    copyBtn.addEventListener('click', () => copyToClipboard(resultBox.innerText));
+    saveTxtBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsTextFile(); });
+    saveCsvBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsCsvFile(); });
+    saveXlsxBtn.addEventListener('click', (e) => { e.preventDefault(); saveAsXlsxFile(); });
     async function copyToClipboard(textToCopy) {
         if (!textToCopy || resultBox.textContent === 'Esperando consulta...') return showNotification('No hay nada que copiar.');
         try {
@@ -527,72 +608,20 @@ Este archivo define la **estructura y el contenido** de la página web que el us
             const originalText = copyTextSpan.textContent;
             copyTextSpan.textContent = '¡Copiado!';
             copyBtn.disabled = true;
-            setTimeout(() => {
-                copyTextSpan.textContent = originalText;
-                copyBtn.disabled = false;
-            }, 1500);
+            setTimeout(() => { copyTextSpan.textContent = originalText; copyBtn.disabled = false; }, 1500);
         } catch (err) {
             console.error('Error al copiar:', err);
             showNotification('No se pudo copiar el texto.');
         }
     }
-
-    function saveAsTextFile() {
-        const textToSave = resultBox.innerText;
-        if (!textToSave) return;
-        triggerDownload(new Blob([textToSave], { type: 'text/plain;charset=utf-8' }), 'gemini-respuesta.txt');
-    }
-
-    function saveAsCsvFile() {
-        const table = resultBox.querySelector('table');
-        if (!table) return showNotification('No se encontró una tabla para exportar a CSV.');
-        let csv = [];
-        table.querySelectorAll('tr').forEach(row => {
-            let rowData = [];
-            row.querySelectorAll('th, td').forEach(cell => rowData.push(`"${cell.innerText.replace(/"/g, '""')}"`));
-            csv.push(rowData.join(','));
-        });
-        triggerDownload(new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' }), 'gemini-tabla.csv');
-    }
-
-    function saveAsXlsxFile() {
-        const table = resultBox.querySelector('table');
-        if (!table) return showNotification('No se encontró una tabla para exportar a XLSX.');
-        const wb = XLSX.utils.table_to_book(table);
-        XLSX.writeFile(wb, 'gemini-tabla.xlsx');
-    }
-    
-    function triggerDownload(blob, filename) {
-        const url = URL.createObjectURL(blob);
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = filename;
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-        URL.revokeObjectURL(url);
-    }
-
-    function setUIState(isLoading) {
-        loadingIndicator.style.display = isLoading ? 'flex' : 'none';
-        executeBtn.disabled = isLoading;
-        clearBtn.disabled = isLoading;
-        const noResult = resultBox.textContent === 'Esperando consulta...';
-        copyBtn.disabled = isLoading || noResult;
-        saveBtn.disabled = isLoading || noResult;
-        downloadDropdown.toggleAttribute('disabled', isLoading || noResult);
-    }
-
-    function clearAll() {
-        promptInput.value = '';
-        resultBox.innerHTML = 'Esperando consulta...';
-        promptInput.style.height = 'auto';
-        setUIState(false);
-    }
-
-    function showNotification(message) {
-        alert(message);
-    }
+    function saveAsTextFile() { const textToSave = resultBox.innerText; if (!textToSave || textToSave === 'Esperando consulta...') return; triggerDownload(new Blob([textToSave], { type: 'text/plain;charset=utf-8' }), 'gemini-conversacion.txt'); }
+    function saveAsCsvFile() { const tables = resultBox.querySelectorAll('table'); if (tables.length === 0) return showNotification('No se encontró una tabla para exportar a CSV.'); const table = tables[tables.length - 1]; let csv = []; table.querySelectorAll('tr').forEach(row => { let rowData = []; row.querySelectorAll('th, td').forEach(cell => rowData.push(`"${cell.innerText.replace(/"/g, '""')}"`)); csv.push(rowData.join(',')); }); triggerDownload(new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' }), 'gemini-tabla.csv'); }
+    function saveAsXlsxFile() { const tables = resultBox.querySelectorAll('table'); if (tables.length === 0) return showNotification('No se encontró una tabla para exportar a XLSX.'); const table = tables[tables.length - 1]; const wb = XLSX.utils.table_to_book(table); XLSX.writeFile(wb, 'gemini-tabla.xlsx'); }
+    function triggerDownload(blob, filename) { const url = URL.createObjectURL(blob); const anchor = document.createElement('a'); anchor.href = url; anchor.download = filename; document.body.appendChild(anchor); anchor.click(); document.body.removeChild(anchor); URL.revokeObjectURL(url); }
+    function setUIState(isLoading) { loadingIndicator.style.display = isLoading ? 'flex' : 'none'; executeBtn.disabled = isLoading; clearBtn.disabled = isLoading; newChatBtn.disabled = isLoading; micBtn.disabled = isLoading; const hasContent = resultBox.textContent !== 'Esperando consulta...' && resultBox.innerHTML.trim() !== ''; copyBtn.disabled = isLoading || !hasContent; saveBtn.disabled = isLoading || !hasContent; downloadDropdown.toggleAttribute('disabled', isLoading || !hasContent); }
+    function clearPromptInput() { promptInput.value = ''; promptInput.style.height = 'auto'; promptInput.focus(); }
+    function startNewChat() { currentChatHistory = []; promptInput.value = ''; resultBox.innerHTML = 'Esperando consulta...'; promptInput.style.height = 'auto'; setUIState(false); }
+    function showNotification(message) { alert(message); }
 
     // --- Carga Inicial ---
     document.addEventListener('DOMContentLoaded', () => {
@@ -601,11 +630,12 @@ Este archivo define la **estructura y el contenido** de la página web que el us
       themeToggleBtn.textContent = theme === 'light' ? '🌞' : '🌜';
       updatePrismTheme(theme);
       loadHistory();
-      clearAll();
+      startNewChat();
     });
   </script>
 </body>
 </html>
+
 <!-- Fin del documento HTML -->
 
 ```
@@ -738,7 +768,7 @@ Este archivo define la **apariencia visual y el diseño (layout)** de la aplicac
   --primary-color-darker: #2980b9;
   --danger-color: #e74c3c;
   --danger-color-darker: #c0392b;
-  --info-color: #0dcaf0;
+  --info-color: #0dcaf0; 
   --info-color-darker: #0aa3c2;
   --success-color: #198754;
   --success-color-darker: #157347;
@@ -770,8 +800,8 @@ Este archivo define la **apariencia visual y el diseño (layout)** de la aplicac
   --shadow-button-hover: 0 2px 5px rgba(0, 0, 0, 0.2);
   --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  --base-font-size: 17px;
-  --line-height-normal: 1.6;
+  --base-font-size: 16px; /* CORRECCIÓN: Ligeramente reducido */
+  --line-height-normal: 1.5; /* CORRECCIÓN: Reducido para texto más denso */
   --spacing-unit: 8px;
   --button-padding-y: 10px;
   --button-padding-x: 20px;
@@ -849,9 +879,39 @@ body {
 .history-panel.open {
   transform: translateX(0);
 }
-.history-header {
-  padding: 15px;
+
+.history-actions {
+  padding: 10px;
   border-bottom: 1px solid var(--border-color-light);
+}
+
+#newChatBtn {
+  background-color: var(--info-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-standard);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-unit);
+  width: 100%;
+  padding-top: var(--button-padding-y);
+  padding-bottom: var(--button-padding-y);
+}
+#newChatBtn:hover {
+    background-color: var(--info-color-darker);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-button-hover);
+}
+[data-theme="dark"] #newChatBtn {
+    color: var(--text-color-dark);
+}
+
+.history-header {
+  padding: 15px 15px 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -859,6 +919,7 @@ body {
 .history-header h3 {
   color: var(--text-color-dark);
   margin: 0;
+  font-size: 1.1em;
 }
 #clearHistoryBtn {
     background: none;
@@ -866,14 +927,18 @@ body {
     cursor: pointer;
     font-size: 1.2rem;
     padding: 5px;
-    color: var(--text-color-normal);
+    color: var(--secondary-color);
 }
+#clearHistoryBtn:hover {
+    color: var(--danger-color);
+}
+
 .history-list {
   flex-grow: 1;
   overflow-y: auto;
 }
 .history-item {
-  padding: 12px 15px;
+  padding: 10px 15px;
   border-bottom: 1px solid var(--border-color-light);
   cursor: pointer;
   white-space: nowrap;
@@ -890,6 +955,7 @@ body {
   color: var(--secondary-color);
   font-style: italic;
 }
+
 .menu-toggle {
   position: fixed;
   top: 15px;
@@ -920,7 +986,8 @@ body {
    ========================================== */
 .main-content {
   width: 100%;
-  padding: calc(var(--spacing-unit) * 2.5);
+  padding: var(--spacing-unit);
+  padding-top: calc(15px + 40px + 15px);
   transition: margin-left var(--transition-speed) ease-in-out;
 }
 .main-content.history-open {
@@ -938,7 +1005,7 @@ body {
 h1 {
   text-align: center;
   color: var(--text-color-dark);
-  margin-bottom: calc(var(--spacing-unit) * 4);
+  margin-bottom: calc(var(--spacing-unit) * 3);
   font-weight: 600;
   transition: color var(--transition-speed) ease;
 }
@@ -1000,9 +1067,11 @@ h1 {
 
 .button-group, .result-actions {
   display: flex;
+  align-items: center;
   gap: calc(var(--spacing-unit) * 1.5);
   flex-wrap: wrap;
 }
+
 button, .dropdown-toggle {
   display: inline-flex;
   align-items: center;
@@ -1116,54 +1185,106 @@ button:disabled {
   font-weight: 600;
 }
 .result-box {
-  padding: calc(var(--spacing-unit) * 2);
+  padding: var(--spacing-unit);
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-standard);
-  background-color: var(--background-color-result);
+  background-color: var(--background-color-body);
   min-height: 150px;
   font-family: var(--font-family-sans);
   color: var(--text-color-normal);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: auto;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-unit);
 }
-.result-box .error-message {
-  color: var(--text-color-error);
-  font-weight: bold;
+[data-theme="dark"] .result-box {
+  background-color: #2c3e50;
 }
-.result-box strong { color: var(--text-color-dark); font-weight: 600; }
-.result-box a { color: var(--primary-color); text-decoration: none; }
-.result-box a:hover { text-decoration: underline; color: var(--primary-color-darker); }
-.result-box table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1em 0;
+
+/* Chat Message Styles */
+.chat-message {
+    padding: calc(var(--spacing-unit) * 1.5);
+    border-radius: var(--border-radius-standard);
 }
-.result-box th, .result-box td {
-  border: 1px solid var(--border-color-medium);
-  padding: 8px;
-  text-align: left;
+
+.chat-message .message-header {
+    font-size: 0.85em;
+    color: var(--secondary-color);
+    margin-bottom: calc(var(--spacing-unit) / 2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.result-box th {
-  background-color: var(--background-color-code);
-  font-weight: bold;
+.chat-message .message-header strong {
+    color: var(--text-color-dark);
+    font-size: 1.1em;
 }
-.result-box tr:nth-child(even) { background-color: rgba(0,0,0,0.02); }
-[data-theme="dark"] .result-box tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+.chat-message .timestamp {
+    font-size: 0.9em;
+    color: var(--text-color-light);
+}
+
+.chat-message .message-content {
+    line-height: var(--line-height-normal);
+    color: var(--text-color-normal);
+}
+
+.chat-message .message-content > *:first-child {
+  margin-top: 0;
+}
+.chat-message .message-content > *:last-child {
+  margin-bottom: 0;
+}
+.chat-message .message-content p,
+.chat-message .message-content ul,
+.chat-message .message-content ol,
+.chat-message .message-content pre {
+  margin-bottom: calc(var(--spacing-unit) * 1.25);
+}
+.chat-message .message-content ul,
+.chat-message .message-content ol {
+  padding-left: 20px;
+}
+
+.user-message {
+    background-color: var(--background-color-result);
+    border: 1px solid var(--border-color-light);
+}
+.user-message .message-header strong {
+    color: var(--primary-color);
+}
+.model-message {
+    background-color: var(--background-color-container);
+    border: 1px solid var(--border-color-medium);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.model-message .message-header strong {
+    color: var(--success-color);
+}
+.error-message-display {
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+.error-message-display .message-header strong {
+    color: var(--danger-color);
+}
+
 
 /* ==========================================
    8. Bloques de Código (Prism) y Plugins
    ========================================== */
-.result-box pre[class*="language-"] {
+pre[class*="language-"] {
   position: relative;
   font-family: var(--font-family-mono);
   overflow: auto;
-  padding: 1em; 
+  padding: 1em !important;
+  margin: 0.5em 0;
+  border-radius: var(--border-radius-standard);
 }
 
-/* Ajuste para el plugin de números de línea */
 pre.line-numbers {
-  padding-left: 3.8em;
+  padding-left: 3.8em !important;
 }
 
 div.code-toolbar {
@@ -1176,17 +1297,16 @@ div.code-toolbar > .toolbar {
   right: 0.5em;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  z-index: 3; /* Asegura que esté sobre los números de línea */
+  z-index: 3;
 }
 
 div.code-toolbar:hover > .toolbar {
   opacity: 1;
 }
 
-/* ✅ FIX: Estilo del botón de copiar de Prism */
 div.code-toolbar > .toolbar .toolbar-item > button {
   background: var(--background-color-button-toggle);
-  color: var(--text-color-dark); /* Texto oscuro para tema claro */
+  color: var(--text-color-dark);
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-standard);
   padding: 0.3em 0.6em;
@@ -1194,29 +1314,20 @@ div.code-toolbar > .toolbar .toolbar-item > button {
   cursor: pointer;
   box-shadow: none;
 }
-
-/* ✅ FIX: Estilo para el tema oscuro */
 [data-theme="dark"] div.code-toolbar > .toolbar .toolbar-item > button {
-    background: #5c6e80; /* Un gris medio oscuro */
-    color: var(--text-color-dark); /* Texto claro */
+    background: #5c6e80;
+    color: var(--text-color-dark);
     border-color: #789;
 }
-
-/* Estilo hover para ambos temas */
 div.code-toolbar > .toolbar .toolbar-item > button:hover {
   background: var(--primary-color) !important;
   color: #fff !important;
   border-color: transparent !important;
 }
-
 [data-theme="dark"] div.code-toolbar > .toolbar .toolbar-item > button:hover {
   background: var(--primary-color-darker) !important;
 }
 
-/* Ocultar el botón de copiar que hacíamos manualmente */
-.copy-code-btn {
-    display: none;
-}
 
 /* ==========================================
    9. Loading Spinner y Otros
@@ -1257,6 +1368,7 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
   .main-content {
     margin-left: 0 !important;
     padding: 15px;
+    padding-top: 70px;
   }
   .main-content.history-open {
     transform: translateX(var(--history-panel-width));
@@ -1266,20 +1378,26 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
   }
   .container { padding: 15px; }
   h1 { font-size: 1.5em; }
+
   .button-group, .result-actions {
     justify-content: center;
   }
-  .button-group button {
+  .button-group button, .result-actions > * {
     flex-grow: 1;
   }
-  .dropdown { width: 100%; }
-  .dropdown-toggle { width: 100%; }
+  .dropdown { 
+      flex-grow: 1;
+      display: flex;
+  }
+  .dropdown-toggle { 
+      width: 100%;
+  }
 }
 
 /* ==========================================
    11. Mejoras de Contraste para Prism en Modo Oscuro
    ========================================== */
-[data-theme="dark"] .result-box pre[class*="language-"] {
+[data-theme="dark"] pre[class*="language-"] {
     background: #2d2d2d;
     color: #ccc;
     border: 1px solid #4a637d;
@@ -1322,7 +1440,7 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
 }
 [data-theme="dark"] .token.atrule,
 [data-theme="dark"] .token.attr-value,
-[data-theme="dark"] .token.function,
+[data-theme="d ark"] .token.function,
 [data-theme="dark"] .token.class-name {
   color: #e6db74;
 }
@@ -1332,6 +1450,58 @@ div.code-toolbar > .toolbar .toolbar-item > button:hover {
 [data-theme="dark"] .token.regex,
 [data-theme="dark"] .token.important {
   color: #fd971f;
+}
+
+[data-theme="dark"] .user-message {
+    background-color: var(--background-color-input);
+    border-color: var(--border-color-medium);
+}
+[data-theme="dark"] .user-message .message-header strong {
+    color: var(--primary-color-darker);
+}
+[data-theme="dark"] .model-message {
+    background-color: var(--background-color-result);
+    border-color: var(--border-color-light);
+}
+[data-theme="dark"] .model-message .message-header strong {
+    color: var(--success-color-darker);
+}
+[data-theme="dark"] .error-message-display {
+    background-color: rgba(241, 148, 138, 0.1);
+    border-color: var(--danger-color-darker);
+}
+
+/* ==========================================
+   12. AJUSTES FINALES DE UI
+   ========================================== */
+
+/* --- Texto del prompt en blanco puro para modo oscuro --- */
+[data-theme="dark"] .prompt-area {
+    color: #FFFFFF;
+}
+
+/* ===============================================================
+   12. AJUSTE: Placeholder del Prompt en Modo Oscuro
+   =============================================================== */
+   
+/*
+  Este bloque se dirige específicamente al placeholder del área de texto
+  cuando el tema oscuro está activo.
+*/
+[data-theme="dark"] .prompt-area::placeholder {
+  color: #FFFFFF !important;      /* 1. Cambia el color a blanco puro */
+  opacity: 1 !important;           /* 2. CRÍTICO: Elimina la transparencia que lo hace ver "mudo" */
+  font-size: 14px !important;      /* 3. Lo hace un poco más pequeño que el texto normal (que es de 18px) */
+}
+
+/* Fallback para navegadores más antiguos (buena práctica) */
+[data-theme="dark"] .prompt-area::-webkit-input-placeholder {
+  color: #FFFFFF !important;
+  font-size: 14px !important;
+}
+[data-theme="dark"] .prompt-area:-ms-input-placeholder {
+  color: #FFFFFF !important;
+  font-size: 14px !important;
 }
 
 ```
@@ -1378,11 +1548,9 @@ const axios = require('axios');
 // --- Configuración CORS ---
 const allowCors = (fn) => async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*'); // ⚠️ Cambia en producción
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
@@ -1390,86 +1558,107 @@ const allowCors = (fn) => async (req, res) => {
   return await fn(req, res);
 };
 
-// --- Tu lista de Modelos en orden de prioridad ---
-// Usamos modelos públicos confirmados para asegurar la funcionalidad. 
-const MODELOS_GEMINI = [
-  'gemini-2.5-pro',
-  'gemini-2.5-flash',
-  'gemini-2-pro',
-  'gemini-2',
-  'gemini-1.5-pro-latest',
-  'gemini-1.5-flash-latest'
+// ✅ CORRECCIÓN: Lista Maestra actualizada con los modelos más recientes de Gemini 2.5.
+// El orden es de mayor a menor capacidad/costo.
+const ALL_MODELS = [
+  'gemini-2.5-pro',         // El más nuevo y potente
+  'gemini-2.5-flash',       // El más nuevo y rápido
+  'gemini-1.5-pro-latest',    // Fallback potente de la generación anterior
+  'gemini-1.5-flash-latest',  // Fallback rápido de la generación anterior
+  'gemini-pro'                // Fallback final, el más antiguo
 ];
 
+/**
+ * Elige dinámicamente el ORDEN de los modelos a probar.
+ * @param {number} totalChars - El número total de caracteres en la conversación.
+ * @returns {string[]} Una lista ordenada de todos los modelos a probar.
+ */
+const getDynamicModelList = (totalChars) => {
+  // Umbral ajustado: si la conversación tiene más de 4000 caracteres, usamos Pro.
+  const THRESHOLD = 4000;
 
-// --- Delay entre reintentos ---
+  if (totalChars > THRESHOLD) {
+    console.log(`🤖 Conversación larga (${totalChars} chars). Priorizando Pro: ${ALL_MODELS[0]}.`);
+    // El orden por defecto es ideal para prompts largos: 2.5 Pro, 1.5 Pro, etc.
+    return [
+        ALL_MODELS[0], // gemini-2.5-pro
+        ALL_MODELS[2], // gemini-1.5-pro-latest
+        ALL_MODELS[1], // gemini-2.5-flash
+        ALL_MODELS[3], // gemini-1.5-flash-latest
+        ALL_MODELS[4], // gemini-pro
+    ];
+  } else {
+    console.log(`⚡ Conversación corta (${totalChars} chars). Priorizando Flash: ${ALL_MODELS[1]}.`);
+    // Para prompts cortos, priorizamos los modelos Flash por velocidad.
+    return [
+        ALL_MODELS[1], // gemini-2.5-flash
+        ALL_MODELS[3], // gemini-1.5-flash-latest
+        ALL_MODELS[0], // gemini-2.5-pro
+        ALL_MODELS[2], // gemini-1.5-pro-latest
+        ALL_MODELS[4], // gemini-pro
+    ];
+  }
+};
+
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// --- Lógica de Fallback con validación de respuesta COMPLETA ---
-const fetchFromModels = async (prompt, apiKey) => {
+const fetchFromModels = async (messages, modelList) => {
   let lastError = null;
 
-  for (let model of MODELOS_GEMINI) {
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    console.log(`🚀 Probando modelo: ${model}`);
+  for (let model of modelList) {
+    // El endpoint v1beta es compatible con todos estos modelos.
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${process.env.GOOGLE_API_KEY}`;
+    console.log(`🚀 Probando modelo para chat: ${model}`);
 
     try {
-      const response = await axios.post(
-        apiUrl,
-        {
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 8192 // Límite alto para asegurar respuestas completas
-          }
+      const response = await axios.post(apiUrl, {
+        contents: messages,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 8192,
         },
-        { 
-            headers: { 'Content-Type': 'application/json' },
-            timeout: 30000 // Timeout de 30 segundos para dar tiempo a respuestas largas
-        }
-      );
+        safetySettings: [
+          { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+          { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+          { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" },
+          { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE" }
+        ]
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 45000,
+      });
 
-      // --- Validación Avanzada ---
       const candidate = response.data?.candidates?.[0];
-      const textResult = candidate?.content?.parts?.[0]?.text;
+      const hasTextResult = candidate?.content?.parts?.some(p => p.text);
       const finishReason = candidate?.finishReason;
 
-      // Condición de Éxito: Hay texto Y la razón de finalización NO es por límite de tokens.
-      if (textResult && finishReason !== 'MAX_TOKENS') {
-        console.log(`✅ Respuesta completa y válida de ${model}. Razón: ${finishReason}`);
+      if (hasTextResult && (finishReason === 'STOP' || finishReason === 'MAX_TOKENS')) {
+        console.log(`✅ Respuesta válida de ${model}. (Razón: ${finishReason})`);
         return response.data;
       }
       
-      if (finishReason === 'MAX_TOKENS') {
-        console.warn(`⚠️ Respuesta de ${model} cortada por límite de tokens. Probando siguiente...`);
-        lastError = new Error(`Respuesta incompleta (MAX_TOKENS) de ${model}`);
-        continue;
-      }
-      
-      console.warn(`⚠️ Contenido vacío o inválido de ${model}. Razón: ${finishReason}`);
-      lastError = new Error(`Respuesta vacía o bloqueada (${finishReason}) de ${model}`);
+      lastError = new Error(`Respuesta vacía o bloqueada de ${model} (Razón: ${finishReason || 'Desconocida'})`);
+      console.warn(`⚠️ ${lastError.message}. Probando siguiente modelo...`);
       continue;
 
     } catch (error) {
       lastError = error;
       const status = error.response?.status || 500;
-      const message = error.response?.data?.error?.message || 'Sin detalles';
+      const errorMessage = error.response?.data?.error?.message || error.message;
 
-      console.warn(`❌ Error en ${model} [${status}]: ${message}`);
-      // Reintentamos con el siguiente modelo si es un error del servidor, de cuota o no encontrado.
-      if ([429, 503, 404].includes(status) || status >= 500) {
-        await delay(1000);
-        continue;
+      console.warn(`❌ Error en ${model} [${status}]: ${errorMessage}. Probando siguiente...`);
+      
+      if (status === 400) {
+        throw error;
       }
       
-      // Otro tipo de error (ej. 400 Bad Request) no se reintenta y se lanza para ser manejado abajo.
-      throw error;
+      await delay(500);
+      continue;
     }
   }
 
-  // Si el bucle termina, es porque todos los modelos de la lista fallaron.
-  console.error('⛔ Todos los modelos fallaron o no devolvieron contenido válido.');
-  throw lastError;
+  console.error('⛔ Todos los modelos en la lista fallaron.');
+  throw lastError || new Error('No se pudo obtener una respuesta de ningún modelo de IA.');
 };
 
 // --- Handler principal ---
@@ -1479,8 +1668,10 @@ const handler = async (req, res) => {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  const { prompt } = req.body;
-  if (!prompt) return res.status(400).json({ error: 'El campo "prompt" es requerido.' });
+  const { messages } = req.body;
+  if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ error: 'El campo "messages" es requerido y debe ser un array no vacío.' });
+  }
 
   const apiKey = process.env.GOOGLE_API_KEY;
   if (!apiKey) {
@@ -1489,22 +1680,21 @@ const handler = async (req, res) => {
   }
 
   try {
-    const responseData = await fetchFromModels(prompt, apiKey);
+    const totalChars = messages.reduce((acc, msg) => acc + (msg.parts[0].text ? msg.parts[0].text.length : 0), 0);
+    const modelList = getDynamicModelList(totalChars);
+
+    const responseData = await fetchFromModels(messages, modelList);
     return res.status(200).json(responseData);
 
   } catch (error) {
-    console.error('💥 Error final:', error.message);
+    console.error('💥 Error final en el handler:', error.message);
     const statusCode = error.response?.status || 500;
-    let errorMessage = error.response?.data?.error?.message || 'No se pudo obtener una respuesta válida de los modelos. Intenta nuevamente.';
+    let errorMessage = error.response?.data?.error?.message || 'No se pudo obtener una respuesta de los modelos. Intenta nuevamente.';
 
-    if (statusCode === 429) {
-      errorMessage = 'Has excedido la cuota de solicitudes. Espera un momento.';
-    } else if (statusCode === 400) {
-      errorMessage = 'Solicitud inválida. Revisa tu prompt, puede contener información sensible.';
-    } else if (error.code === 'ECONNABORTED') {
-      errorMessage = 'La solicitud tardó demasiado en responder (Timeout). Inténtalo de nuevo.';
-    }
-
+    if (statusCode === 429) errorMessage = 'Se ha excedido la cuota de solicitudes. Espera un momento.';
+    else if (statusCode === 400) errorMessage = 'Solicitud inválida. Revisa el contenido, puede contener información sensible.';
+    else if (error.code === 'ECONNABORTED') errorMessage = 'La solicitud tardó demasiado en responder (Timeout).';
+    
     return res.status(statusCode).json({ error: errorMessage });
   }
 };
